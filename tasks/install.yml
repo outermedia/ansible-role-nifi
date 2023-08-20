@@ -9,7 +9,7 @@
 
 - name: Get NiFi binary checksum
   ansible.builtin.uri:
-    url: https://archive.apache.org/dist/nifi/{{ nifi_version }}/nifi-{{ nifi_version }}-bin.tar.gz.sha256
+    url: "{{ download_checksum_uri }}/nifi/{{ nifi_version }}/nifi-{{ nifi_version }}-bin.tar.gz.sha256"
     return_content: true
   register: sha256_sum
   when: not tar_file.stat.exists
