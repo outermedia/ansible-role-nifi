@@ -26,8 +26,8 @@ nifi_properties:
 
 # Specify any property from bootstrap.conf here.
 bootstrap:
-  java.arg.2: '-Xms512m'
-  java.arg.3: '-Xmx512m'
+  java.arg.2: -Xms512m
+  java.arg.3: -Xmx512m
 
 # Specify any property from nifi-env.sh here.
 nifi_env:

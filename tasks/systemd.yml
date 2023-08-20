@@ -1,12 +1,12 @@
 ---
 - name: Copy systemd template
-  template:
-    src: "templates/nifi.service.j2"
-    dest: "/etc/systemd/system/nifi.service"
+  ansible.builtin.template:
+    src: templates/nifi.service.j2
+    dest: /etc/systemd/system/nifi.service
+    mode: "0640"
 
 - name: Enable NiFi service
-  systemd:
+  ansible.builtin.systemd:
     name: nifi
-    daemon_reload: yes
-    enabled: yes
-  
+    daemon_reload: true
+    enabled: true
