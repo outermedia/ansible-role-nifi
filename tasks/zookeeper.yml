@@ -26,3 +26,9 @@
         line: "{{ item.key }}={{ item.value }}"
         regexp: ^{{ item.key }}
       with_dict: "{{ zookeeper }}"
+
+- name: Correct zookeeper.properties dataDir
+  ansible.builtin.lineinfile:
+    path: "{{ nifi_config_dirs.home }}/conf/zookeeper.properties"
+    regexp: dataDir=(.*)
+    line: dataDir={{ zookeeper_dataDir }}
