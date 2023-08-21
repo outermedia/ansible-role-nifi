@@ -2,6 +2,7 @@
 nifi_version: 1.23.1
 
 # See https://www.apache.org/dyn/closer.lua to find mirrors
+nifi_download_format: zip
 download_mirror_uri: https://archive.apache.org/dist
 download_checksum_uri: https://archive.apache.org/dist
 

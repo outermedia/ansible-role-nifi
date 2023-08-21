@@ -5,7 +5,7 @@
     line: "{{ item.key }}={{ item.value }}"
     regexp: ^{{ item.key }}=
   with_dict: "{{ nifi_properties }}"
-  notify: restart_nifi
+  notify: Restart_nifi
 
 - name: Update bootstrap.conf
   ansible.builtin.lineinfile:
@@ -13,7 +13,7 @@
     line: "{{ item.key }}={{ item.value }}"
     regexp: ^{{ item.key }}=
   with_dict: "{{ bootstrap }}"
-  notify: restart_nifi
+  notify: Restart_nifi
 
 - name: Update nifi-env.sh
   ansible.builtin.lineinfile:
@@ -21,7 +21,7 @@
     line: export {{ item.key }}={{ item.value }}
     regexp: ^export {{ item.key }}=
   with_dict: "{{ nifi_env }}"
-  notify: restart_nifi
+  notify: Restart_nifi
 
 - name: Update state-management.xml
   xml:
@@ -30,7 +30,7 @@
     value: "{{ item.value }}"
     pretty_print: true
   with_dict: "{{ state_management }}"
-  notify: restart_nifi
+  notify: Restart_nifi
 
 - name: Update logback.xml
   xml:
@@ -39,7 +39,7 @@
     value: "{{ item.value }}"
     pretty_print: true
   with_dict: "{{ logback }}"
-  notify: restart_nifi
+  notify: Restart_nifi
 
 - name: Update login-identity-providers.xml
   when: login_identity_providers | length
@@ -56,7 +56,7 @@
         value: "{{ item.value }}"
         pretty_print: true
       with_dict: "{{ login_identity_providers }}"
-      notify: restart_nifi
+      notify: Restart_nifi
 
 - name: Update authorizers.xml
   when: authorizers | length
@@ -73,11 +73,11 @@
         value: "{{ item.value }}"
         pretty_print: true
       with_dict: "{{ authorizers }}"
-      notify: restart_nifi
+      notify: Restart_nifi
 
 - name: Prepare Zookeeper
-  ansible.builtin.include: zookeeper.yml
+  ansible.builtin.import_task: zookeeper.yml
   when:
     - nifi_properties['nifi.state.management.embedded.zookeeper.start'] is defined
     - nifi_properties['nifi.state.management.embedded.zookeeper.start'] | bool
-  notify: restart_nifi
+  notify: Restart_nifi
