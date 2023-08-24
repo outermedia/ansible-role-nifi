@@ -1,9 +1,9 @@
 ---
 - name: Prepare system
-  ansible.builtin.import_task: prepare.yml
+  ansible.builtin.import_tasks: prepare.yml
 - name: Install NiFi
-  ansible.builtin.import_task: install.yml
+  ansible.builtin.import_tasks: install.yml
 - name: Customize NiFi
-  ansible.builtin.import_task: customize.yml
+  ansible.builtin.import_tasks: customize.yml
 - name: Add NiFi as system service
-  ansible.builtin.import_task: systemd.yml
+  ansible.builtin.import_tasks: systemd.yml

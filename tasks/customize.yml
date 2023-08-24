@@ -76,7 +76,7 @@
       notify: Restart_nifi
 
 - name: Prepare Zookeeper
-  ansible.builtin.import_task: zookeeper.yml
+  ansible.builtin.import_tasks: zookeeper.yml
   when:
     - nifi_properties['nifi.state.management.embedded.zookeeper.start'] is defined
     - nifi_properties['nifi.state.management.embedded.zookeeper.start'] | bool
