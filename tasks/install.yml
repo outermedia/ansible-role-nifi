@@ -1,7 +1,7 @@
 ---
 - name: Check if NiFi binary exists
   ansible.builtin.stat:
-    path: "{{ nifi_config_dirs.binaries }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
+    path: "{{ nifi_binaries_tmp_dir }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
     get_attributes: false
     get_checksum: false
     get_mime: false
@@ -17,16 +17,14 @@
 - name: Download NiFi binary
   ansible.builtin.get_url:
     url: "{{ download_mirror_uri }}/nifi/{{ nifi_version }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
-    dest: "{{ nifi_config_dirs.binaries }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
-    mode: "0640"
+    dest: "{{ nifi_binaries_tmp_dir }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
     checksum: sha256:{{ sha256_sum.content }}
-    tmp_dest: /tmp
   when: not tar_file.stat.exists
 
 - name: Unpack NiFi binary
   ansible.builtin.unarchive:
     remote_src: "yes"
-    src: "{{ nifi_config_dirs.binaries }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
+    src: "{{ nifi_binaries_tmp_dir }}/nifi-{{ nifi_version }}-bin.{{ download_format }}"
     dest: "{{ nifi_config_dirs.install }}/"
     owner: "{{ nifi_user }}"
     group: "{{ nifi_group }}"

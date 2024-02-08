@@ -9,8 +9,9 @@ download_checksum_uri: https://archive.apache.org/dist
 nifi_user: nifi
 nifi_group: nifi
 
+nifi_binaries_tmp_dir: /tmp
+
 nifi_config_dirs:
-  binaries: /tmp
   install: /opt/nifi/releases
   home: /opt/nifi/releases/current
   external_config: /opt/nifi/config_resources
