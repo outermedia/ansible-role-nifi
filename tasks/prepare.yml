@@ -20,12 +20,12 @@
     state: directory
     owner: "{{ nifi_user }}"
     group: "{{ nifi_group }}"
-    mode: "0750"
+    mode: "0755"
   loop: "{{ nifi_config_dirs | dict2items }}"
 
 - name: Set NiFi home
   ansible.builtin.lineinfile:
     path: /etc/environment
     line: export NIFI_HOME={{ nifi_config_dirs.home }}
-    mode: "0640"
+    mode: "0644"
     create: "yes"
