@@ -38,6 +38,18 @@
     xpath: "{{ item.key }}"
     value: "{{ item.value }}"
     pretty_print: true
+  when: item.value is not mapping
+  with_dict: "{{ logback }}"
+  notify: Restart_nifi
+
+- name: Update logback.xml
+  xml:
+    path: "{{ nifi_config_dirs.home }}/conf/logback.xml"
+    xpath: "{{ item.key }}"
+    attribute: "{{ item.value.attribute }}"
+    value: "{{ item.value.value }}"
+    pretty_print: true
+  when: item.value is mapping
   with_dict: "{{ logback }}"
   notify: Restart_nifi
 

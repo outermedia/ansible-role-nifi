@@ -38,9 +38,13 @@ nifi_env:
 
 # Specify any property from logback.xml here.
 # Use XPath expressions as keys.
+# The value can either be a string or number representing the text content of a text node, 
+# or it can be a dictionary in the format { attribute: attributeName, value: attributeValue } for setting attributes.
 logback:
   /configuration/appender[@name="APP_FILE"]/rollingPolicy/maxFileSize: 100MB
   /configuration/appender[@name="APP_FILE"]/rollingPolicy/maxHistory: 30
+#  /configuration/logger[@name="org.apache.pdfbox.pdmodel.font.PDType0Font"]: { attribute: level, value: ERROR }
+
 
 # Specify any property from login-identity-providers.xml here.
 # Use XPath expressions as keys.
