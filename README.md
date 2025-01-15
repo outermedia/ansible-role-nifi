@@ -55,6 +55,13 @@ authorizers:
 zookeeper:
 ```
 
+The systemd service can be configured using
+
+* `nifi_max_processes_limit` - Set LimitNPROC. Is unset if variable is undefined
+* `nifi_solr_open_files_limit` - Set LimitNOFILE (default 50000)
+* `nifi_systemd_restart` - Set Restart (default 'on-failure')
+* `nifi_systemd_oom_policy` - Set OOMPolicy (default 'continue' )
+
 ## Dependencies
 
 None.
