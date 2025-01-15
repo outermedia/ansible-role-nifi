@@ -4,11 +4,16 @@ After=network.target
 
 [Service]
 Type=forking
-LimitNOFILE=50000
+{% if nifi_max_processes_limit is defined -%}
+LimitNPROC={{ nifi_max_processes_limit }}
+{% endif -%}
+LimitNOFILE={{ nifi_solr_open_files_limit | default('50000') }}
 User={{ nifi_user }}
 Group={{ nifi_group }}
 ExecStart={{ nifi_config_dirs.home }}/bin/nifi.sh start
 ExecStop={{ nifi_config_dirs.home }}/bin/nifi.sh stop
+Restart={{ nifi_systemd_restart | default('on-failure') }}
+OOMPolicy={{ nifi_systemd_oom_policy | default('continue') }}
 
 [Install]
 WantedBy=multi-user.target
